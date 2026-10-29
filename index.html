@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethan Norland — Creative Technologist, Visual Designer & Artist</title>
+  <meta name="description" content="Portfolio of Ethan Norland. Creative technologist, 3D WebGL developer, visual brand designer, editorial publisher, and creator of Bracelet Designer.">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="canonical" href="https://ethannorland.github.io/">
+  <meta name="theme-color" content="#0B0E14">
+
+  <style>
+    :root {
+      --bg: #0B0E14;
+      --bg-alt: #10141D;
+      --surface: #141923;
+      --surface-card: #1A2130;
+      --surface-hover: #222C3E;
+      --border: rgba(136, 164, 196, 0.18);
+      --border-gold: rgba(210, 172, 76, 0.35);
+      --gold: #D2AC4C;
+      --gold-light: #F3E5AB;
+      --gold-dark: #A57E23;
+      --silver: #A8A9AC;
+      --accent: #88A4C4;
+      --fg: #F1F5F9;
+      --fg-muted: #94A3B8;
+      --fg-subtle: #64748B;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
+      --font-serif: 'Cinzel', 'Playfair Display', 'Didot', 'Georgia', serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'SF Mono', Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--gold-light);
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────── */
+    .header-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 14, 20, 0.85);
+      border-bottom: 1px solid var(--border);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--fg);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .brand-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, #7A5812 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0B0E14;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 8px rgba(210, 172, 76, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-nav-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--fg);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #FFF;
+    }
+
+    .btn-nav-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: #0B0E14;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 12px rgba(210, 172, 76, 0.35);
+      transition: all 0.15s ease;
+    }
+
+    .btn-nav-gold:hover {
+      color: #0B0E14;
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO SECTION ─────────────────────────────────────────── */
+    .hero-section {
+      position: relative;
+      padding: 80px 24px 60px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(210, 172, 76, 0.14) 0%, rgba(136, 164, 196, 0.05) 50%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(210, 172, 76, 0.10);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #FFF;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #FFF 20%, var(--gold-light) 65%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: var(--fg);
+      max-width: 780px;
+      margin: 0 auto 32px auto;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .hero-bio {
+      font-size: 1.02rem;
+      color: var(--fg-muted);
+      max-width: 720px;
+      margin: 0 auto 36px auto;
+      line-height: 1.65;
+    }
+
+    .hero-social-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--surface-card);
+      border-color: var(--gold);
+      color: #FFF;
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTION SHARED ────────────────────────────────────────── */
+    .section-wrap {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.8vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: #FFF;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: var(--fg-muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── FLAGSHIP PROJECT SPOTLIGHT ────────────────────────────── */
+    .project-hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      box-shadow: var(--shadow-lg), 0 0 50px rgba(210, 172, 76, 0.12);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .project-preview-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(210, 172, 76, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      background: #0B0E14;
+    }
+
+    .project-preview-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .project-preview-wrap:hover img {
+      transform: scale(1.02);
+    }
+
+    .project-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(210, 172, 76, 0.12);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .project-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 14px;
+    }
+
+    .project-desc {
+      color: var(--fg-muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .project-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .project-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-launch-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: #0B0E14;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(210, 172, 76, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-launch-primary:hover {
+      color: #0B0E14;
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--fg);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #FFF;
+      transform: translateY(-2px);
+    }
+
+    /* ── ARCHITECTURAL HIGHLIGHTS ──────────────────────────────── */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .highlight-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(210, 172, 76, 0.35);
+    }
+
+    .highlight-icon {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .highlight-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 10px;
+    }
+
+    .highlight-card-text {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ── POSTER PREVIEW & LIGHTBOX MODAL ──────────────────────── */
+    .poster-preview-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 90, 95, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      background: #06080C;
+    }
+
+    .poster-preview-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .poster-preview-card:hover img {
+      transform: scale(1.02);
+      filter: brightness(1.04);
+    }
+
+    .poster-overlay-badge {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(11, 14, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    .poster-preview-card:hover .poster-overlay-badge {
+      background: rgba(255, 90, 95, 0.95);
+      border-color: rgba(255, 90, 95, 1);
+    }
+
+    .poster-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .poster-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .poster-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 10, 15, 0.90);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .poster-modal-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      width: 100%;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+      animation: modalZoom 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalZoom {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .poster-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(11, 14, 20, 0.85);
+      border: 1px solid var(--border);
+      color: #FFF;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .poster-modal-close:hover {
+      background: #E11D48;
+      border-color: #E11D48;
+      transform: rotate(90deg);
+    }
+
+    .poster-modal-image-container {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #06080C;
+      padding: 16px;
+      overflow: auto;
+    }
+
+    .poster-modal-image {
+      max-width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      display: block;
+    }
+
+    .poster-modal-bar {
+      padding: 18px 24px;
+      background: var(--surface-card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .poster-modal-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: #FFF;
+      margin-bottom: 2px;
+    }
+
+    .poster-modal-info p {
+      font-size: 0.84rem;
+      color: var(--fg-muted);
+    }
+
+    .poster-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .zine-page-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-zine-page {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-zine-page:hover:not(:disabled) {
+      background: rgba(139, 92, 246, 0.35);
+      border-color: #8B5CF6;
+      color: #FFF;
+    }
+
+    .btn-zine-page:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .zine-page-counter {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #C4B5FD;
+      min-width: 90px;
+      text-align: center;
+    }
+
+    /* ── PHILOSOPHY MANIFESTO ──────────────────────────────────── */
+    .philosophy-banner {
+      background: linear-gradient(135deg, rgba(20, 25, 35, 0.9) 0%, rgba(26, 33, 48, 0.9) 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 48px 36px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .phil-item h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #FFF;
+      margin-bottom: 10px;
+    }
+
+    .phil-item p {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT & FOOTER ──────────────────────────────────────── */
+    .contact-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px 32px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: #080A0F;
+      padding: 48px 32px 36px 32px;
+      color: var(--fg-subtle);
+      font-size: 0.88rem;
+      margin-top: 60px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--fg-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ── MOBILE ────────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .header-nav {
+        padding: 0 16px;
+      }
+      .nav-links {
+        gap: 16px;
+      }
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+      .project-hero-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 28px;
+      }
+      .hero-section {
+        padding: 50px 16px 40px 16px;
+      }
+      .section-wrap {
+        padding: 60px 16px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <div id="about"></div>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="header-nav">
+    <a href="./" class="brand-link">
+      <div class="brand-avatar">EN</div>
+      <span>Ethan Norland</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>✦</span> Creative Technologist & 3D Web Craftsman
+      </div>
+      <h1 class="hero-title">
+        Crafting <span>Tactile Digital Experiences</span>
+      </h1>
+      <p class="hero-tagline">
+        Building high-performance 3D atelier software, zero-dependency graphics systems, and tactile physical interfaces for the modern web.
+      </p>
+
+      <div class="hero-social-links">
+        <a href="#liquid-death" class="social-btn" style="border-color: rgba(255, 90, 95, 0.4); background: rgba(255, 90, 95, 0.08); color: #FF8589;">
+          <span>💀 Liquid Death</span>
+          <span>↓</span>
+        </a>
+        <a href="#disney-zine" class="social-btn" style="border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.08); color: #C4B5FD;">
+          <span>📖 Disney Zine</span>
+          <span>↓</span>
+        </a>
+        <a href="#stanlee" class="social-btn" style="border-color: rgba(230, 36, 41, 0.4); background: rgba(230, 36, 41, 0.08); color: #FCA5A5;">
+          <span>🦸‍♂️ Stan Lee</span>
+          <span>↓</span>
+        </a>
+        <a href="#shoe" class="social-btn" style="border-color: rgba(224, 169, 109, 0.4); background: rgba(224, 169, 109, 0.08); color: #F0C495;">
+          <span>👟 Shoe Study</span>
+          <span>↓</span>
+        </a>
+        <a href="https://ethannorland.github.io/braceletdesigner/" class="social-btn" style="border-color:var(--border-gold); background:rgba(210,172,76,0.1); color:var(--gold-light);">
+          <span>Live 3D Studio</span>
+          <span>→</span>
+        </a>
+        <a href="https://ethannorland.github.io/braceletdesigner/landing.html" class="social-btn">
+          <span>Landing Page</span>
+          <span>→</span>
+        </a>
+        <a href="https://github.com/EthanNorland" target="_blank" rel="noopener noreferrer" class="social-btn">
+          <span>GitHub</span>
+          <span style="color:var(--gold);">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ETHAN NORLAND -->
+  <section class="section-wrap" id="about-card" style="padding-top: 0; padding-bottom: 30px;">
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <div class="brand-avatar" style="width: 44px; height: 44px; font-size: 1rem; flex-shrink: 0;">EN</div>
+      <div style="flex: 1; min-width: 260px;">
+        <h4 style="font-size: 1.05rem; color: #FFF; margin-bottom: 4px;">About Ethan Norland</h4>
+        <p style="font-size: 0.95rem; color: var(--fg-muted); line-height: 1.6; margin: 0;">
+          Ethan Norland is a student at Kendall College of Art and Design. He is majoring in Collaborative Design and minoring in Graphic Design. He is just beginning his journey as a UI/UX designer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section class="section-wrap" id="projects">
+    <div class="section-header">
+      <span class="section-tag">Selected Works</span>
+      <h2 class="section-title">Featured Projects & Art Direction</h2>
+      <p class="section-desc">
+        Bridging high-performance 3D interactive engineering, tactile atelier software, and high-impact visual design & brand identity.
+      </p>
+    </div>
+
+    <!-- PROJECT 1: BRACELET DESIGNER -->
+    <div class="project-hero-card">
+      <div class="project-preview-wrap">
+        <a href="https://ethannorland.github.io/braceletdesigner/" title="Open Live 3D Studio">
+          <img src="reference/studio_hero_preview.png" alt="Bracelet Designer 3D Atelier Preview">
+        </a>
+      </div>
+
+      <div>
+        <div class="project-meta-pill">✦ Interactive 3D WebGL PWA</div>
+        <h3 class="project-title">Bracelet Designer</h3>
+        <p class="project-desc">
+          Created to give jewelers, artisans, and everyday creators an intuitive 3D tabletop workbench. Slide realistic beads along bases, deboss personalized monograms, and test true-to-scale fit on an anatomical human arm.
+        </p>
+
+        <div class="project-action-buttons">
+          <a href="https://ethannorland.github.io/braceletdesigner/" class="btn-launch-primary">
+            <span>Launch Studio</span>
+            <span>→</span>
+          </a>
+          <a href="https://ethannorland.github.io/braceletdesigner/landing.html" class="btn-secondary-link">
+            <span>View Landing Page</span>
+            <span>↗</span>
+          </a>
+          <a href="https://github.com/EthanNorland/braceletdesigner" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">
+            <span>Source Code</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURAL HIGHLIGHTS -->
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <div class="highlight-icon">⚡</div>
+        <h4 class="highlight-card-title">Physical Non-Penetration Collision</h4>
+        <p class="highlight-card-text">
+          Custom chord-based collision geometry preventing beads and spacers from passing through each other. Beads stop flush with hairline clearance right before surface contact.
+        </p>
+      </div>
+
+      <div class="highlight-card">
+        <div class="highlight-icon">🦾</div>
+        <h4 class="highlight-card-title">Anatomical 3D Arm Fit Scaling</h4>
+        <p class="highlight-card-text">
+          Watertight human arm and hand model with ulnar styloid bone geometry that dynamically scales in real time with wrist circumference adjustments (140mm–220mm) across 4 skin tones.
+        </p>
+      </div>
+
+      <div class="highlight-card">
+        <div class="highlight-icon">🔊</div>
+        <h4 class="highlight-card-title">Tactile Procedural Audio Engine</h4>
+        <p class="highlight-card-text">
+          Zero-dependency Web Audio synthesizer generating unique resonant acoustic timbres tailored to glass, quartz, precious metals, stone, and wood during sliding and latching.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 90, 95, 0.4), transparent); margin: 68px 0 54px 0;"></div>
+
+    <!-- PROJECT 2: LIQUID DEATH POSTER -->
+    <div class="project-hero-card" id="liquid-death" style="border-color: rgba(255, 90, 95, 0.35); box-shadow: var(--shadow-lg), 0 0 50px rgba(255, 90, 95, 0.08);">
+      <div class="poster-preview-card" onclick="openPosterModal()" title="Click to inspect full resolution poster">
+        <img src="reference/liquid_death_poster_preview.jpg" alt="Liquid Death Halloween Final Poster Artwork" id="poster-thumb">
+        <div class="poster-overlay-badge">
+          <span>🔍 Inspect Master (5100 × 3300)</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="project-meta-pill" style="color: #FF7D82; background: rgba(255, 90, 95, 0.12); border: 1px solid rgba(255, 90, 95, 0.28);">✦ Visual Branding & Art Direction</div>
+        <h3 class="project-title">Liquid Death — Halloween Campaign</h3>
+        <p class="project-desc">
+          Official commemorative Halloween campaign poster created for <em>Liquid Death Mountain Water</em> under their iconic brand ethos <em>Murder Your Thirst</em>. Features an ominous ice-cold atmosphere, custom distressed and frost-bitten headline typography ("SERVED CHILLED" & "HAPPY HALLOWEEN"), and visceral commercial art direction crafted for large-format print advertising.
+        </p>
+
+        <div class="project-action-buttons">
+          <button type="button" onclick="openPosterModal()" class="btn-launch-primary" style="background: linear-gradient(135deg, #FF5A5F 0%, #B81D24 100%); color: #FFF; box-shadow: 0 4px 16px rgba(255, 90, 95, 0.35); border: none; cursor: pointer;">
+            <span>Inspect Artwork</span>
+            <span>🔍</span>
+          </button>
+          <a href="reference/liquid%20death%20final%20poster%20.jpg" target="_blank" download="Liquid-Death-Final-Poster.jpg" class="btn-secondary-link" title="Download original 16MB print master">
+            <span>Download Master (16 MB)</span>
+            <span>↓</span>
+          </a>
+          <a href="reference/liquid%20death%20final%20poster%20.jpg" target="_blank" class="btn-secondary-link" title="Open master file in new tab">
+            <span>Open Original</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTER HIGHLIGHTS GRID -->
+    <div class="highlights-grid" style="margin-top: 32px;">
+      <div class="highlight-card" style="border-color: rgba(255, 90, 95, 0.2);">
+        <div class="highlight-icon">💀</div>
+        <h4 class="highlight-card-title">Subversive Brand Atmosphere</h4>
+        <p class="highlight-card-text">
+          Channeled Liquid Death's aggressive heavy-metal aesthetic into a seasonal Halloween campaign—amplifying their signature irreverent tone with chilling iced visual storytelling.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(255, 90, 95, 0.2);">
+        <div class="highlight-icon">❄️</div>
+        <h4 class="highlight-card-title">Chilled Typography & Custom Lettering</h4>
+        <p class="highlight-card-text">
+          Engineered frost-bitten, distressed headline typography ("SERVED CHILLED" & "HAPPY HALLOWEEN") layered over ominous icy depth to command immediate visual attention.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(255, 90, 95, 0.2);">
+        <div class="highlight-icon">📐</div>
+        <h4 class="highlight-card-title">Commercial Print Master (300 DPI)</h4>
+        <p class="highlight-card-text">
+          Crafted at 5100 × 3300 px ultra-high resolution with precise CMYK color separations, tailored for large-format commercial street posters, in-store endcaps, and high-DPI digital displays.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent); margin: 68px 0 54px 0;"></div>
+
+    <!-- PROJECT 3: DISNEY ZINE -->
+    <div class="project-hero-card" id="disney-zine" style="border-color: rgba(139, 92, 246, 0.35); box-shadow: var(--shadow-lg), 0 0 50px rgba(139, 92, 246, 0.08);">
+      <div class="poster-preview-card" onclick="openZineModal(1)" title="Click to read all 8 pages of Disney Zine" style="border-color: rgba(139, 92, 246, 0.35);">
+        <img src="reference/disneyzine_spread_preview.jpg" alt="Best and Worst of Disney World Editorial Zine Spread Preview" id="disney-zine-thumb">
+        <div class="poster-overlay-badge" style="background: rgba(11, 14, 20, 0.88);">
+          <span>📖 Read Online (8 Pages)</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="project-meta-pill" style="color: #C4B5FD; background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.28);">✦ Editorial Publication &amp; Zine Design</div>
+        <h3 class="project-title">The Best &amp; Worst of Disney World</h3>
+        <p class="project-desc">
+          An original 8-page folded editorial critique zine dissecting the magic and missteps of Walt Disney World. Analyzes theme park architecture, attraction design, transportation logistics, resort hotels, dining, and snacks with candid commentary, sharp categorization, and high-contrast typographic layout.
+        </p>
+
+        <div class="project-action-buttons">
+          <button type="button" onclick="openZineModal(1)" class="btn-launch-primary" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); color: #FFF; box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35); border: none; cursor: pointer;">
+            <span>Read Online</span>
+            <span>📖</span>
+          </button>
+          <a href="reference/DisneyZine.pdf" target="_blank" class="btn-secondary-link" title="Open PDF in new tab">
+            <span>Open PDF (18 MB)</span>
+            <span>↗</span>
+          </a>
+          <a href="reference/DisneyZine.pdf" target="_blank" download="DisneyZine-EthanNorland.pdf" class="btn-secondary-link" title="Download original PDF">
+            <span>Download PDF</span>
+            <span>↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISNEY ZINE HIGHLIGHTS GRID -->
+    <div class="highlights-grid" style="margin-top: 32px;">
+      <div class="highlight-card" style="border-color: rgba(139, 92, 246, 0.2);">
+        <div class="highlight-icon">🎢</div>
+        <h4 class="highlight-card-title">Unvarnished Park Critique</h4>
+        <p class="highlight-card-text">
+          Honest, unfiltered evaluations contrasting peak Disney immersion (Rise of the Resistance, Dole Whip) against cautionary missteps (All-Star Sports, Turkey Leg).
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(139, 92, 246, 0.2);">
+        <div class="highlight-icon">📑</div>
+        <h4 class="highlight-card-title">Pocket Zine Architecture</h4>
+        <p class="highlight-card-text">
+          Engineered for the half-letter 8-page folded booklet format, pacing distinct categories (Parks, Transit, Rides, Snacks, Hotels, Dining) into punchy, highly readable spreads.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(139, 92, 246, 0.2);">
+        <div class="highlight-icon">🎨</div>
+        <h4 class="highlight-card-title">Categorical Visual Hierarchy</h4>
+        <p class="highlight-card-text">
+          High-contrast visual partitioning between "BEST" and "WORST" classifications utilizing bold vertical letter-spacing, bulleted breakdowns, and structured reading rhythm.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(230, 36, 41, 0.4), transparent); margin: 68px 0 54px 0;"></div>
+
+    <!-- PROJECT 4: STAN LEE TYPOGRAPHIC PORTRAIT -->
+    <div class="project-hero-card" id="stanlee" style="border-color: rgba(230, 36, 41, 0.35); box-shadow: var(--shadow-lg), 0 0 50px rgba(230, 36, 41, 0.08);">
+      <div class="poster-preview-card" onclick="openStanLeeModal()" title="Click to inspect full resolution Stan Lee typographic portrait" style="border-color: rgba(230, 36, 41, 0.35);">
+        <img src="reference/typographic_portrait_stan_lee_preview.jpg" alt="Stan Lee Typographic Tribute Portrait by Ethan Norland" id="stanlee-thumb" style="aspect-ratio: 0.77; object-fit: cover; max-height: 480px; margin: 0 auto;">
+        <div class="poster-overlay-badge" style="background: rgba(11, 14, 20, 0.88);">
+          <span>🔍 Inspect Master (2550 × 3300)</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="project-meta-pill" style="color: #FCA5A5; background: rgba(230, 36, 41, 0.12); border: 1px solid rgba(230, 36, 41, 0.28);">✦ Typographic Illustration &amp; Digital Art</div>
+        <h3 class="project-title">Stan Lee — Typographic Tribute Portrait</h3>
+        <p class="project-desc">
+          A complex typographic illustration capturing the likeness of comic book pioneer Stan Lee, constructed entirely from the names of legendary Marvel heroes, villains, and cosmic entities he co-created. Letterforms are scaled, contoured, and weighted to delineate facial bone structure, nuanced wrinkles, and his iconic tinted aviator sunglasses.
+        </p>
+
+        <div class="project-action-buttons">
+          <button type="button" onclick="openStanLeeModal()" class="btn-launch-primary" style="background: linear-gradient(135deg, #E62429 0%, #991B1B 100%); color: #FFF; box-shadow: 0 4px 16px rgba(230, 36, 41, 0.35); border: none; cursor: pointer;">
+            <span>Inspect Portrait</span>
+            <span>🔍</span>
+          </button>
+          <a href="reference/Typographic%20Portrait%20Stan%20Lee%20.png" target="_blank" class="btn-secondary-link" title="Open master file in new tab">
+            <span>Open Original</span>
+            <span>↗</span>
+          </a>
+          <a href="reference/Typographic%20Portrait%20Stan%20Lee%20.png" target="_blank" download="Typographic-Portrait-Stan-Lee-Ethan-Norland.png" class="btn-secondary-link" title="Download master PNG">
+            <span>Download Master</span>
+            <span>↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAN LEE HIGHLIGHTS GRID -->
+    <div class="highlights-grid" style="margin-top: 32px;">
+      <div class="highlight-card" style="border-color: rgba(230, 36, 41, 0.2);">
+        <div class="highlight-icon">🦸‍♂️</div>
+        <h4 class="highlight-card-title">Narrative Typographic Sculpture</h4>
+        <p class="highlight-card-text">
+          Every facial plane, shadow, and contour is composed of iconic characters (Spider-Man, Cyclops, Falcon, Kraven the Hunter, Overmind, Lockjaw)—merging storytelling directly into visual form.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(230, 36, 41, 0.2);">
+        <div class="highlight-icon">👓</div>
+        <h4 class="highlight-card-title">Typographic Value &amp; Weight Density</h4>
+        <p class="highlight-card-text">
+          Font scale, tracking, and stroke weight dynamically vary to render dark lens reflections, skin tone gradients, and delicate hair highlights without traditional halftone screening.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(230, 36, 41, 0.2);">
+        <div class="highlight-icon">📐</div>
+        <h4 class="highlight-card-title">Print-Ready 300 DPI Resolution</h4>
+        <p class="highlight-card-text">
+          Rendered at 2550 × 3300 px master resolution, preserving razor-sharp character legibility whether viewed at room scale as a poster or inspected under high digital magnification.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(224, 169, 109, 0.4), transparent); margin: 68px 0 54px 0;"></div>
+
+    <!-- PROJECT 5: FOOTWEAR STUDY -->
+    <div class="project-hero-card" id="shoe" style="border-color: rgba(224, 169, 109, 0.35); box-shadow: var(--shadow-lg), 0 0 50px rgba(224, 169, 109, 0.08);">
+      <div class="poster-preview-card" onclick="openShoeModal()" title="Click to inspect full resolution footwear drawing study" style="border-color: rgba(224, 169, 109, 0.35);">
+        <img src="reference/shoe_preview.jpg" alt="Footwear Study — Observational Sneaker Drawing by Ethan Norland" id="shoe-thumb" style="aspect-ratio: 1.30; object-fit: cover; max-height: 480px; margin: 0 auto;">
+        <div class="poster-overlay-badge" style="background: rgba(11, 14, 20, 0.88);">
+          <span>🔍 Inspect Master (3609 × 2772)</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="project-meta-pill" style="color: #F0C495; background: rgba(224, 169, 109, 0.12); border: 1px solid rgba(224, 169, 109, 0.28);">✦ Observational Drawing &amp; Footwear Study</div>
+        <h3 class="project-title">Footwear Study — Observational Drawing</h3>
+        <p class="project-desc">
+          An intricate observational fine art study exploring the structural anatomy, tactile textures, and volumetric form of footwear. Features detailed rendering of layered leather panels, woven mesh, complex lace draping, and rubber sole tread contours—grounded in rigorous tonal draftsmanship.
+        </p>
+
+        <div class="project-action-buttons">
+          <button type="button" onclick="openShoeModal()" class="btn-launch-primary" style="background: linear-gradient(135deg, #E0A96D 0%, #A57E23 100%); color: #0B0E14; box-shadow: 0 4px 16px rgba(224, 169, 109, 0.35); border: none; cursor: pointer;">
+            <span>Inspect Drawing</span>
+            <span>🔍</span>
+          </button>
+          <a href="reference/shoe.jpg" target="_blank" class="btn-secondary-link" title="Open master file in new tab">
+            <span>Open Original</span>
+            <span>↗</span>
+          </a>
+          <a href="reference/shoe.jpg" target="_blank" download="Shoe-Drawing-Ethan-Norland.jpg" class="btn-secondary-link" title="Download high resolution master">
+            <span>Download High-Res</span>
+            <span>↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOE HIGHLIGHTS GRID -->
+    <div class="highlights-grid" style="margin-top: 32px;">
+      <div class="highlight-card" style="border-color: rgba(224, 169, 109, 0.2);">
+        <div class="highlight-icon">👟</div>
+        <h4 class="highlight-card-title">Tactile Material Differentiation</h4>
+        <p class="highlight-card-text">
+          Nuanced mark-making distinguishing stitched leather grain, breathable woven textiles, pliable rubber foxing, and interwoven cotton shoelaces.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(224, 169, 109, 0.2);">
+        <div class="highlight-icon">📐</div>
+        <h4 class="highlight-card-title">Volumetric Footwear Anatomy</h4>
+        <p class="highlight-card-text">
+          Accurate spatial perspective capturing the three-dimensional curve of the heel collar, arch support curvature, and asymmetrical toe box contours.
+        </p>
+      </div>
+
+      <div class="highlight-card" style="border-color: rgba(224, 169, 109, 0.2);">
+        <div class="highlight-icon">💡</div>
+        <h4 class="highlight-card-title">Chiaroscuro &amp; Tonal Depth</h4>
+        <p class="highlight-card-text">
+          Deep, resonant core shadows under the sole and tongue transitioning smoothly into crisp specular highlights across curved upper panels.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN PHILOSOPHY -->
+  <section class="section-wrap" id="philosophy">
+    <div class="philosophy-banner">
+      <span class="section-tag">Guiding Principles</span>
+      <h2 class="section-title" style="text-align: left; margin-bottom: 12px;">Craftsmanship Over Bloat</h2>
+      <p style="color:var(--fg-muted); max-width:750px; font-size:1.02rem; line-height:1.6;">
+        Software is most rewarding when it behaves like a set of finely tuned physical tools on a real workshop bench.
+      </p>
+
+      <div class="philosophy-grid">
+        <div class="phil-item">
+          <h3>✦ Tactile Physicality</h3>
+          <p>
+            Digital objects shouldn't feel flat or lifeless. When dragging a bead along a cord, physical collision feedback, acoustic material resonance, and realistic specular luster make digital manipulation deeply satisfying.
+          </p>
+        </div>
+
+        <div class="phil-item">
+          <h3>✦ Privacy & Autonomy</h3>
+          <p>
+            Users shouldn't have to create accounts, accept tracking cookies, or depend on remote clouds just to explore a creative idea. All designs persist locally in the browser, completely private.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET IN TOUCH / CONTACT -->
+  <section class="section-wrap" id="contact">
+    <div class="contact-banner">
+      <span class="section-tag">Let's Connect</span>
+      <h2 class="section-title">Interested in Collaborating?</h2>
+      <p style="color:var(--fg-muted); max-width:580px; margin:0 auto 28px auto; font-size:1.05rem;">
+        Whether you have questions about his projects, want to discuss 3D web graphics, or explore creative engineering and design collaborations, feel free to reach out directly.
+      </p>
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; align-items:center;">
+        <a href="mailto:ethannorland3@gmail.com" class="btn-launch-primary" title="Email ethannorland3@gmail.com">
+          <span>✉️ ethannorland3@gmail.com</span>
+        </a>
+        <a href="https://github.com/EthanNorland" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">
+          <span>GitHub: @EthanNorland ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="brand-avatar" style="width:28px; height:28px; font-size:0.75rem;">EN</div>
+        <span><strong>Ethan Norland</strong> — Creative Technologist</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="./">Portfolio</a></li>
+        <li><a href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">About</a></li>
+        <li><a href="mailto:ethannorland3@gmail.com">Contact</a></li>
+        <li><a href="https://ethannorland.github.io/braceletdesigner/landing.html">Atelier Landing</a></li>
+        <li><a href="https://ethannorland.github.io/braceletdesigner/">3D Studio App</a></li>
+        <li><a href="https://github.com/EthanNorland" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+      <div>v1.9.60 • Built with Care</div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL FOR LIQUID DEATH POSTER -->
+  <div id="poster-modal" class="poster-modal" aria-hidden="true" role="dialog" aria-label="Liquid Death Poster Lightbox">
+    <div class="poster-modal-backdrop" onclick="closePosterModal()"></div>
+    <div class="poster-modal-content">
+      <button class="poster-modal-close" onclick="closePosterModal()" aria-label="Close modal">✕</button>
+      <div class="poster-modal-image-container">
+        <img src="reference/liquid_death_poster_display.jpg" alt="Liquid Death Final Poster - High Resolution Master Display" class="poster-modal-image" id="modal-poster-img">
+      </div>
+      <div class="poster-modal-bar">
+        <div class="poster-modal-info">
+          <h4>Liquid Death — Halloween Campaign Poster</h4>
+          <p>Master Dimensions: 5100 × 3300 px • 300 DPI • SWOP v2 CMYK &amp; sRGB Calibrated</p>
+        </div>
+        <div class="poster-modal-actions">
+          <a href="reference/liquid%20death%20final%20poster%20.jpg" target="_blank" download="Liquid-Death-Final-Poster.jpg" class="btn-nav-gold">
+            <span>Download Master (16 MB) ↓</span>
+          </a>
+          <a href="reference/liquid%20death%20final%20poster%20.jpg" target="_blank" class="btn-nav-outline">
+            <span>Open Raw Master ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR DISNEY ZINE -->
+  <div id="zine-modal" class="poster-modal" aria-hidden="true" role="dialog" aria-label="Disney Zine Reader Lightbox">
+    <div class="poster-modal-backdrop" onclick="closeZineModal()"></div>
+    <div class="poster-modal-content" style="border-color: rgba(139, 92, 246, 0.45);">
+      <button class="poster-modal-close" onclick="closeZineModal()" aria-label="Close modal">✕</button>
+      <div class="poster-modal-image-container">
+        <img src="reference/disneyzine_page_1.jpg" alt="Disney Zine Page" class="poster-modal-image" id="modal-zine-img" style="max-height: 70vh;">
+      </div>
+      <div class="poster-modal-bar">
+        <div class="poster-modal-info">
+          <h4>The Best &amp; Worst of Disney World — Zine Reader</h4>
+          <p>8-Page Folded Publication • Written, Designed &amp; Illustrated by Ethan Norland</p>
+        </div>
+        <div class="zine-page-nav">
+          <button type="button" class="btn-zine-page" id="btn-zine-prev" onclick="prevZinePage()">← Previous</button>
+          <span class="zine-page-counter" id="zine-page-counter">Page 1 of 8</span>
+          <button type="button" class="btn-zine-page" id="btn-zine-next" onclick="nextZinePage()">Next →</button>
+        </div>
+        <div class="poster-modal-actions">
+          <a href="reference/DisneyZine.pdf" target="_blank" class="btn-nav-outline" style="border-color: rgba(139, 92, 246, 0.5); color: #C4B5FD;">
+            <span>Open PDF ↗</span>
+          </a>
+          <a href="reference/DisneyZine.pdf" target="_blank" download="DisneyZine-EthanNorland.pdf" class="btn-nav-gold" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); color: #FFF;">
+            <span>Download PDF (18 MB) ↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR SHOE FOOTWEAR STUDY -->
+  <div id="shoe-modal" class="poster-modal" aria-hidden="true" role="dialog" aria-label="Footwear Study Drawing Lightbox">
+    <div class="poster-modal-backdrop" onclick="closeShoeModal()"></div>
+    <div class="poster-modal-content" style="border-color: rgba(224, 169, 109, 0.45);">
+      <button class="poster-modal-close" onclick="closeShoeModal()" aria-label="Close modal">✕</button>
+      <div class="poster-modal-image-container">
+        <img src="reference/shoe_display.jpg" alt="Footwear Study — Observational Drawing by Ethan Norland" class="poster-modal-image" id="modal-shoe-img" style="max-height: 72vh;">
+      </div>
+      <div class="poster-modal-bar">
+        <div class="poster-modal-info">
+          <h4>Footwear Study — Observational Drawing</h4>
+          <p>Master Dimensions: 3609 × 2772 px • High-Resolution Observational Drawing</p>
+        </div>
+        <div class="poster-modal-actions">
+          <a href="reference/shoe.jpg" target="_blank" download="Shoe-Drawing-Ethan-Norland.jpg" class="btn-nav-gold" style="background: linear-gradient(135deg, #E0A96D 0%, #A57E23 100%); color: #0B0E14;">
+            <span>Download Master ↓</span>
+          </a>
+          <a href="reference/shoe.jpg" target="_blank" class="btn-nav-outline">
+            <span>Open Original ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR STAN LEE TYPOGRAPHIC PORTRAIT -->
+  <div id="stanlee-modal" class="poster-modal" aria-hidden="true" role="dialog" aria-label="Stan Lee Typographic Portrait Lightbox">
+    <div class="poster-modal-backdrop" onclick="closeStanLeeModal()"></div>
+    <div class="poster-modal-content" style="border-color: rgba(230, 36, 41, 0.45);">
+      <button class="poster-modal-close" onclick="closeStanLeeModal()" aria-label="Close modal">✕</button>
+      <div class="poster-modal-image-container">
+        <img src="reference/typographic_portrait_stan_lee_display.jpg" alt="Stan Lee Typographic Tribute Portrait Master Display" class="poster-modal-image" id="modal-stanlee-img" style="max-height: 72vh;">
+      </div>
+      <div class="poster-modal-bar">
+        <div class="poster-modal-info">
+          <h4>Stan Lee — Typographic Tribute Portrait</h4>
+          <p>Master Dimensions: 2550 × 3300 px • 300 DPI • Rendered with Marvel Character Letterforms</p>
+        </div>
+        <div class="poster-modal-actions">
+          <a href="reference/Typographic%20Portrait%20Stan%20Lee%20.png" target="_blank" download="Typographic-Portrait-Stan-Lee-Ethan-Norland.png" class="btn-nav-gold" style="background: linear-gradient(135deg, #E62429 0%, #991B1B 100%); color: #FFF;">
+            <span>Download Master ↓</span>
+          </a>
+          <a href="reference/Typographic%20Portrait%20Stan%20Lee%20.png" target="_blank" class="btn-nav-outline">
+            <span>Open Original ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPosterModal() {
+      const modal = document.getElementById('poster-modal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePosterModal() {
+      const modal = document.getElementById('poster-modal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    let currentZinePage = 1;
+    const totalZinePages = 8;
+
+    function openZineModal(page) {
+      currentZinePage = typeof page === 'number' ? page : 1;
+      updateZineModal();
+      const modal = document.getElementById('zine-modal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeZineModal() {
+      const modal = document.getElementById('zine-modal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function updateZineModal() {
+      const img = document.getElementById('modal-zine-img');
+      const counter = document.getElementById('zine-page-counter');
+      const btnPrev = document.getElementById('btn-zine-prev');
+      const btnNext = document.getElementById('btn-zine-next');
+      if (img) img.src = `reference/disneyzine_page_${currentZinePage}.jpg`;
+      if (counter) counter.textContent = `Page ${currentZinePage} of ${totalZinePages}`;
+      if (btnPrev) btnPrev.disabled = (currentZinePage <= 1);
+      if (btnNext) btnNext.disabled = (currentZinePage >= totalZinePages);
+    }
+
+    function nextZinePage() {
+      if (currentZinePage < totalZinePages) {
+        currentZinePage++;
+        updateZineModal();
+      }
+    }
+
+    function prevZinePage() {
+      if (currentZinePage > 1) {
+        currentZinePage--;
+        updateZineModal();
+      }
+    }
+
+    function openShoeModal() {
+      const modal = document.getElementById('shoe-modal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeShoeModal() {
+      const modal = document.getElementById('shoe-modal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function openStanLeeModal() {
+      const modal = document.getElementById('stanlee-modal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeStanLeeModal() {
+      const modal = document.getElementById('stanlee-modal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closePosterModal();
+        closeZineModal();
+        closeShoeModal();
+        closeStanLeeModal();
+      }
+      const zineModal = document.getElementById('zine-modal');
+      if (zineModal && zineModal.classList.contains('active')) {
+        if (e.key === 'ArrowRight') {
+          nextZinePage();
+        } else if (e.key === 'ArrowLeft') {
+          prevZinePage();
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
